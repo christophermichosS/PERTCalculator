@@ -174,8 +174,11 @@
             // Define weight based on confidence level
             const weight = (confidence - 75) / 24; // Dynamic weight from 75 (0) to 99 (1)
 
-            // Calculate final estimation with weight
-            const finalEstimation = lowerBound + weight * (upperBound - lowerBound);
+            // Calculate final estimation with logical bounds
+            const finalEstimation = Math.max(
+                mostLikely,
+                expected + weight * (upperBound - expected)
+            );
 
             // Display results
             document.getElementById("expected").textContent = expected.toFixed(2);
